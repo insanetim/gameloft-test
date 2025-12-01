@@ -1,4 +1,6 @@
 import { formatPrice } from "../lib/formatPrice"
+import { addToCart } from "../store/features/cartSlice"
+import { useAppDispatch } from "../store/hooks"
 import type { Product } from "../types"
 
 interface CardProps {
@@ -6,6 +8,12 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ product }) => {
+  const dispatch = useAppDispatch()
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(product))
+  }
+
   return (
     <div className="card">
       <img
@@ -20,7 +28,10 @@ const Card: React.FC<CardProps> = ({ product }) => {
         </div>
         <div className="flex flex-col items-end gap-2">
           <span className="font-bold">{formatPrice(product.price)} ₴</span>
-          <button className="btn px-2 py-1 border border-white rounded-md text-nowrap cursor-pointer hover:bg-white/10 transition-colors duration-200">
+          <button
+            className="btn px-2 py-1 border border-white rounded-md text-nowrap cursor-pointer hover:bg-white/10 transition-colors duration-200"
+            onClick={handleAddToCart}
+          >
             Add to cart
           </button>
         </div>

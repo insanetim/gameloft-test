@@ -1,14 +1,11 @@
-.carousel {
+.carousel.swiper {
   --primary-color: #c000fa;
   --swiper-theme-color: var(--primary-color);
   --swiper-pagination-bullet-size: 10px;
   --swiper-pagination-bullet-inactive-color: #b6b3c5;
+  --swiper-pagination-bottom: 30px;
 
   padding: 60px 0;
-
-  .swiper-pagination {
-    bottom: 30px;
-  }
 }
 
 .card {

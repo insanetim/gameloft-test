@@ -2,7 +2,7 @@ import type { Product } from "../types"
 
 export const PRODUCTS: Product[] = [
   {
-    id: 1,
+    id: "50741825-d4e9-4273-8e46-359217395976",
     title: "Ghostwire: Tokyo",
     description:
       "After strange disappearances hit Tokyo's population, it's up to you to uncover the source and purge the city of a strange, new evil",
@@ -11,7 +11,7 @@ export const PRODUCTS: Product[] = [
     price: 969,
   },
   {
-    id: 2,
+    id: "f298f28f-00f4-4204-ba64-119f820faee4",
     title: "Stray",
     description:
       "Lost, alone, and separated from family, a stray cat must untangle an ancient mystery to escape a long-forgotten cybercity and find the way home",
@@ -20,7 +20,7 @@ export const PRODUCTS: Product[] = [
     price: 599,
   },
   {
-    id: 3,
+    id: "a13efbd3-20cd-4e25-a8a3-3b581b0c5a3f",
     title: "S.T.A.L.K.E.R. 2",
     description:
       "S.T.A.L.K.E.R. 2 is a brand-new entry in the legendary series, enjoyed by millions of players worldwide",
@@ -29,7 +29,7 @@ export const PRODUCTS: Product[] = [
     price: 1399,
   },
   {
-    id: 4,
+    id: "9e643550-2225-4854-8748-86c272cd3caf",
     title: "Starfield",
     description:
       "Starfield is the first new universe in 25 years from Bethesda Game Studios",
@@ -38,7 +38,7 @@ export const PRODUCTS: Product[] = [
     price: 1699,
   },
   {
-    id: 5,
+    id: "ef26e909-6510-49a4-9366-38769e8666af",
     title: "God of War: Ragnarök",
     description:
       "Kratos and Atreus must journey to each of the Nine Realms in search of answers as they prepare for the prophesied battle that will end the world",

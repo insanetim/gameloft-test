@@ -1,23 +1,36 @@
 import { Icon } from "@iconify-icon/react"
+import { calculateItemPrice } from "../lib/calculateItemPrice"
 import { formatPrice } from "../lib/formatPrice"
-import type { Product } from "../types"
+import {
+  decrementQuantity,
+  incrementQuantity,
+  removeCartItem,
+} from "../store/features/cartSlice"
+import { useAppDispatch } from "../store/hooks"
+import type { CartItemType } from "../types"
 
 interface CartItemProps {
-  item: Product & { quantity: number }
-  onIncrement: (id: number) => void
-  onDecrement: (id: number) => void
-  onRemove: (id: number) => void
+  item: CartItemType
 }
 
-const CartItem = ({
-  item,
-  onIncrement,
-  onDecrement,
-  onRemove,
-}: CartItemProps) => {
+const CartItem = ({ item }: CartItemProps) => {
+  const dispatch = useAppDispatch()
+
+  const handleIncrement = () => {
+    dispatch(incrementQuantity(item.id))
+  }
+
+  const handleDecrement = () => {
+    dispatch(decrementQuantity(item.id))
+  }
+
+  const handleRemove = () => {
+    dispatch(removeCartItem(item.id))
+  }
+
   return (
     <div className="flex items-center justify-between gap-4 p-3">
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 min-w-0">
         <div className="w-16 h-16 shrink-0 bg-gray-100 rounded-md overflow-hidden">
           <img
             src={item.image}
@@ -29,19 +42,22 @@ const CartItem = ({
           <h3 className="text-sm font-medium text-gray-900 truncate">
             {item.title}
           </h3>
-          <p className="text-sm text-gray-500">{formatPrice(item.price)} ₴</p>
+          <p className="text-sm text-gray-500">
+            {formatPrice(calculateItemPrice(item.price, item.quantity))} ₴
+          </p>
         </div>
       </div>
 
       <div className="flex items-center gap-4">
         <div className="flex items-center">
           <button
-            onClick={() => onDecrement(item.id)}
-            className="w-6 h-6 flex items-center justify-center border border-gray-300 rounded-l-md hover:bg-gray-50 cursor-pointer"
+            className="w-6 h-6 flex items-center justify-center border border-gray-300 rounded-l-md hover:not-disabled:bg-gray-50 cursor-pointer"
             aria-label="Decrease quantity"
+            disabled={item.quantity === 1}
+            onClick={handleDecrement}
           >
             <Icon
-              className="text-md"
+              className={`text-md ${item.quantity === 1 ? "opacity-50" : ""}`}
               icon="tabler:minus"
             />
           </button>
@@ -49,9 +65,9 @@ const CartItem = ({
             {item.quantity}
           </div>
           <button
-            onClick={() => onIncrement(item.id)}
             className="w-6 h-6 flex items-center justify-center border border-gray-300 rounded-r-md hover:bg-gray-50 cursor-pointer"
             aria-label="Increase quantity"
+            onClick={handleIncrement}
           >
             <Icon
               className="text-md"
@@ -60,9 +76,9 @@ const CartItem = ({
           </button>
         </div>
         <button
-          onClick={() => onRemove(item.id)}
           className="flex items-center justify-center text-red-500 hover:text-red-700 cursor-pointer"
           aria-label="Remove item"
+          onClick={handleRemove}
         >
           <Icon
             className="text-xl"
