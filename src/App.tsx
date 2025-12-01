@@ -6,7 +6,7 @@ import Cart from "./components/Cart"
 function App() {
   return (
     <div className="flex flex-col min-h-screen bg-gray-950">
-      <header className="w-full py-2 bg-gray-800 shadow-md shadow-gray-700/20">
+      <header className="w-full py-2 bg-gray-800 shadow-lg shadow-gray-800/20">
         <div className="container mx-auto px-2 flex justify-between items-center">
           <a href="/">
             <img
